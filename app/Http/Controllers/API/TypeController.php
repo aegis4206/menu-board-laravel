@@ -18,7 +18,7 @@ class TypeController extends BaseController
     public function index()
     {
         //
-        $types = Type::all();
+        $types = Type::orderBy('sort')->get();;
         return $this->responseService->response($types, '傳送成功');
     }
 

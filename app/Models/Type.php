@@ -7,7 +7,7 @@ use App\Models\BaseModel;
 class Type extends BaseModel
 {
     //
-    protected $fillable = ['name','imgurl'];
+    protected $fillable = ['sort', 'name', 'imgurl'];
 
     public function posts()
     {

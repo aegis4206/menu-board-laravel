@@ -16,12 +16,10 @@ class PostController extends BaseController
     {
         //
         $query = Post::query();
-
         if ($request->has('type_id')) {
             $query->where('type_id', $request->type_id);
         }
-
-        $posts = $query->get();
+        $posts = $query->orderBy('type_id')->orderBy('tab_id')->orderBy('sort')->get();
         return $this->responseService->response($posts, '查詢成功');
     }
 
@@ -35,7 +33,7 @@ class PostController extends BaseController
         try {
             $request->validate([
                 'imgurl' => 'required|file|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:20480',
-                'content' => 'required|string|max:255',
+                'content' => 'required|string',
                 'title' => 'required|string|max:255',
                 'type_id' => 'required|integer|exists:types,id',
                 'tab_id' => 'required|integer|exists:tabs,id',
@@ -94,7 +92,7 @@ class PostController extends BaseController
         try {
             $request->validate([
                 'title' => 'required|string|max:255',
-                'content' => 'required|string|max:255',
+                'content' => 'required|string',
                 'type_id' => 'required|integer|exists:types,id',
                 'tab_id' => 'required|integer|exists:tabs,id',
                 'imgurl' => 'sometimes|file|mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:20480',

@@ -22,7 +22,7 @@ class TabController extends BaseController
             $query->where('type_id', $request->type_id);
         }
 
-        $tabs = $query->get();
+        $tabs = $query->orderBy('type_id')->orderBy('sort')->get();
         return $this->responseService->response($tabs, '查詢成功');
     }
 
